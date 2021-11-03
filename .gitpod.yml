@@ -1,1 +1,4 @@
 image: hhvm/hhvm:latest
+vscode:
+  extensions:
+  - https://marketplace.visualstudio.com/_apis/public/gallery/publishers/pranayagarwal/vsextensions/vscode-hack/2.12.0/vspackage
