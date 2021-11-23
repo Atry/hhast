@@ -22,5 +22,10 @@
         "Facebook\\HHAST\\DataProviderTypesLinter"
       ]
     }
-  ]
+  ],
+  "linterConfigs": {
+    "Facebook\\HHAST\\HHClientLinter": {
+      "ignore": [5611]
+    }
+  }
 }
