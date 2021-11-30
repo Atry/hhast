@@ -18,13 +18,20 @@ trait LinterCLITestTrait {
   protected function getCLI(
     string ...$argv
   ): (__Private\LinterCLI, IO\MemoryHandle, IO\MemoryHandle, IO\MemoryHandle) {
+    return $this->getCLIInDirectory($argv, null);
+  }
+
+  protected final function getCLIInDirectory(
+    vec<string> $argv,
+    ?string $cwd,
+  ): (__Private\LinterCLI, IO\MemoryHandle, IO\MemoryHandle, IO\MemoryHandle) {
     $argv = Vec\concat(vec[__FILE__], $argv);
     $stdin = new IO\MemoryHandle();
     $stdout = new IO\MemoryHandle();
     $stderr = new IO\MemoryHandle();
     $term = new Terminal($stdin, $stdout, $stderr);
     return tuple(
-      new __Private\LinterCLI($argv, $term),
+      new __Private\LinterCLI($argv, $term, $cwd),
       $stdin,
       $stdout,
       $stderr,
