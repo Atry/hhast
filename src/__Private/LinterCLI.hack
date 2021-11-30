@@ -116,7 +116,7 @@ final class LinterCLI extends CLIWithArguments {
       if (C\is_empty($roots)) {
         await $err->writeAllAsync(
           'You must either specify PATH arguments, or provide a configuration'.
-          "file.\n",
+          "file, in which the `roots` setting is not empty.\n",
         );
         return 1;
       }
