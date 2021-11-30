@@ -23,6 +23,15 @@ final class LinterCLI extends CLIWithArguments {
   use CLIWithVerbosityTrait;
 
   <<__Override>>
+  public function __construct(
+    vec<string> $argv,
+    \Facebook\CLILib\ITerminal $terminal,
+    private ?string $cwd = null,
+  ) {
+    parent::__construct($argv, $terminal);
+  }
+
+  <<__Override>>
   public static function getHelpTextForOptionalArguments(): string {
     return 'PATH';
   }
@@ -102,7 +111,7 @@ final class LinterCLI extends CLIWithArguments {
     $roots = $this->getArguments();
 
     if (C\is_empty($roots)) {
-      $config = LintRunConfig::getForPath(\getcwd());
+      $config = LintRunConfig::getForPath($this->cwd ?? \getcwd());
       $roots = $config->getRoots();
       if (C\is_empty($roots)) {
         await $err->writeAllAsync(
