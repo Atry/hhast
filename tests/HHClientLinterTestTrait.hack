@@ -28,6 +28,9 @@ trait HHClientLinterTestTrait {
       __DIR__.'/../.var/tmp/hhast/'.C\lastx(Str\split(static::class, '\\'));
   }
 
+  <<__Reifiable>>
+  const type TLinter = HHClientLinter;
+
   <<__Override>>
   protected function getLinter(string $file): HHClientLinter {
     $ext = Str\strip_suffix($file, '.in')

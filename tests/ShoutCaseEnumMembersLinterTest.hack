@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class ShoutCaseEnumMembersLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<ASTLintError>;
 
-  <<__Override>>
-  protected function getLinter(string $file): ShoutCaseEnumMembersLinter {
-    return ShoutCaseEnumMembersLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = ShoutCaseEnumMembersLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

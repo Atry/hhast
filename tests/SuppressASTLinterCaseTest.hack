@@ -16,10 +16,8 @@ namespace Facebook\HHAST;
 final class SuppressASTLinterCaseTest extends TestCase {
   use LinterTestTrait;
 
-  <<__Override>>
-  protected function getLinter(string $file): SingleRuleLinter {
-    return CamelCasedMethodsUnderscoredFunctionsLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = CamelCasedMethodsUnderscoredFunctionsLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

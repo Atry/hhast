@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class NoPHPEqualityLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<ASTLintError>;
 
-  <<__Override>>
-  protected function getLinter(string $file): NoPHPEqualityLinter {
-    return NoPHPEqualityLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = NoPHPEqualityLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

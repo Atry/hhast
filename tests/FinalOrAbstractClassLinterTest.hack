@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class FinalOrAbstractClassLinterTest extends TestCase {
   use LinterTestTrait;
 
-  <<__Override>>
-  protected function getLinter(string $file): SingleRuleLinter {
-    return FinalOrAbstractClassLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = FinalOrAbstractClassLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

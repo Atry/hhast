@@ -12,12 +12,8 @@ namespace Facebook\HHAST;
 final class GroupUseStatementAlphabetizationLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<ASTLintError>;
 
-  <<__Override>>
-  protected function getLinter(
-    string $file,
-  ): GroupUseStatementAlphabetizationLinter {
-    return GroupUseStatementAlphabetizationLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = GroupUseStatementAlphabetizationLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class DataProviderTypesLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<ASTLintError>;
 
-  <<__Override>>
-  protected function getLinter(string $file): DataProviderTypesLinter {
-    return DataProviderTypesLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = DataProviderTypesLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

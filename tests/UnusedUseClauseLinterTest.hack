@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class UnusedUseClauseLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<ASTLintError>;
 
-  <<__Override>>
-  protected function getLinter(string $file): AutoFixingASTLinter {
-    return UnusedUseClauseLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = UnusedUseClauseLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

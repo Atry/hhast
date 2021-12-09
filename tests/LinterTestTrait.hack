@@ -16,7 +16,13 @@ use namespace HH\Lib\{C, Str, Vec};
 trait LinterTestTrait {
   require extends TestCase;
 
-  abstract protected function getLinter(string $file): Linter;
+  <<__Reifiable>>
+  abstract const type TLinter as Linter;
+
+  protected function getLinter(string $path): this::TLinter {
+    $linter_class = \HH\ReifiedGenerics\get_classname<this::TLinter>();
+    return $linter_class::newInstance(File::fromPath($path), null);
+  }
 
   abstract public function getCleanExamples(): vec<(string)>;
   final public function getDirtyFixtures(): vec<(string)> {

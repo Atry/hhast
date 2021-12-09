@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class NoElseifLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<ASTLintError>;
 
-  <<__Override>>
-  protected function getLinter(string $file): NoElseifLinter {
-    return NoElseifLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = NoElseifLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

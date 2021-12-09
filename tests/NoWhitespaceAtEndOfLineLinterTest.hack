@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class NoWhitespaceAtEndOfLineLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<LineLintError>;
 
-  <<__Override>>
-  protected function getLinter(string $file): NoWhitespaceAtEndOfLineLinter {
-    return NoWhitespaceAtEndOfLineLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = NoWhitespaceAtEndOfLineLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

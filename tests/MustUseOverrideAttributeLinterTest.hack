@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class MustUseOverrideAttributeLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<ASTLintError>;
 
-  <<__Override>>
-  protected function getLinter(string $file): MustUseOverrideAttributeLinter {
-    return MustUseOverrideAttributeLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = MustUseOverrideAttributeLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

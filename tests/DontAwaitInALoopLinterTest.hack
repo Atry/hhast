@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class DontAwaitInALoopLinterTest extends TestCase {
   use LinterTestTrait;
 
-  <<__Override>>
-  protected function getLinter(string $file): SingleRuleLinter {
-    return DontAwaitInALoopLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = DontAwaitInALoopLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

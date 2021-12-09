@@ -12,12 +12,8 @@ namespace Facebook\HHAST;
 final class ConsistentLineEndingsLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<LineLintError>;
 
-  <<__Override>>
-  protected function getLinter(
-    string $file,
-  ): AutoFixingLineLinter<LineLintError> {
-    return ConsistentLineEndingsLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = ConsistentLineEndingsLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

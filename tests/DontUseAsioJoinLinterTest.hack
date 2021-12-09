@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class DontUseAsioJoinLinterTest extends TestCase {
   use LinterTestTrait;
 
-  <<__Override>>
-  protected function getLinter(string $file): SingleRuleLinter {
-    return DontUseAsioJoinLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = DontUseAsioJoinLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

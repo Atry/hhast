@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class NoEmptyStatementsLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<ASTLintError>;
 
-  <<__Override>>
-  protected function getLinter(string $file): NoEmptyStatementsLinter {
-    return NoEmptyStatementsLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = NoEmptyStatementsLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

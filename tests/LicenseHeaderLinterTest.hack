@@ -12,6 +12,9 @@ namespace Facebook\HHAST;
 final class LicenseHeaderLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<ASTLintError>;
 
+  <<__Reifiable>>
+  const type TLinter = LicenseHeaderLinter;
+
   <<__Override>>
   protected function getLinter(string $file): LicenseHeaderLinter {
     LicenseHeaderLinter::__setExpectedHeaderForTesting(

@@ -12,12 +12,8 @@ namespace Facebook\HHAST;
 final class NoNewlineAtStartOfControlFlowBlockLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<ASTLintError>;
 
-  <<__Override>>
-  protected function getLinter(
-    string $file,
-  ): NoNewlineAtStartOfControlFlowBlockLinter {
-    return NoNewlineAtStartOfControlFlowBlockLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = NoNewlineAtStartOfControlFlowBlockLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

@@ -12,8 +12,11 @@ namespace Facebook\HHAST;
 final class UnusedUseClauseLinterXHPTest extends TestCase {
   use AutoFixingLinterTestTrait<ASTLintError>;
 
+  <<__Reifiable>>
+  const type TLinter = UnusedUseClauseLinter;
+
   <<__Override>>
-  protected function getLinter(string $file): AutoFixingASTLinter {
+  protected function getLinter(string $file): UnusedUseClauseLinter {
     if (!\ini_get('hhvm.hack.lang.disable_xhp_element_mangling')) {
       self::markTestSkipped(
         'requires hhvm.hack.lang.disable_xhp_element_mangling=true',

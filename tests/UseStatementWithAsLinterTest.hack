@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class UseStatementWithAsLinterTest extends TestCase {
   use LinterTestTrait;
 
-  <<__Override>>
-  protected function getLinter(string $file): UseStatementWithAsLinter {
-    return UseStatementWithAsLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = UseStatementWithAsLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {

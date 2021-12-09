@@ -12,10 +12,8 @@ namespace Facebook\HHAST;
 final class UnusedParameterLinterTest extends TestCase {
   use AutoFixingLinterTestTrait<ASTLintError>;
 
-  <<__Override>>
-  protected function getLinter(string $file): UnusedParameterLinter {
-    return UnusedParameterLinter::fromPath($file);
-  }
+  <<__Reifiable>>
+  const type TLinter = UnusedParameterLinter;
 
   <<__Override>>
   public function getCleanExamples(): vec<(string)> {
