@@ -10,12 +10,6 @@ jobs:
     strategy:
       # Run tests on all OS's and HHVM versions, even if one fails
       fail-fast: false
-      matrix:
-        os: [ ubuntu , macos ]
-        hhvm:
-          - '4.128'
-          - latest
-          - nightly
     runs-on: ${{matrix.os}}-latest
     steps:
       - uses: actions/checkout@v2
