@@ -19,12 +19,8 @@ jobs:
     runs-on: ${{matrix.os}}-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: hhvm/actions/hack-lint-test@master
-        with:
-          hhvm: ${{matrix.hhvm}}
-          # We need bin/hhast-lint instead of vendor/bin/hhast-lint
-          skip_lint: true
-      - name: Lint
-        run: bin/hhast-lint
-      - name: Check for manually modified codegen
-        run: vendor/bin/hh-codegen-verify-signatures codegen/
+      - name: test
+        run: |
+          brew update
+          brew install hhvm-4.128
+          lldb --batch -o run -o quit -- hhvm --version
