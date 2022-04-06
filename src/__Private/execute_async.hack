@@ -16,10 +16,14 @@ use namespace HH\Lib\{Str, Vec};
 // * throws on error
 async function execute_async(string ...$args): Awaitable<vec<string>> {
   $command = $args
-    |> Vec\map($$, $arg ==> \escapeshellarg($arg))
+    |> Vec\map($$, \escapeshellarg<>)
     |> Str\join($$, ' ');
 
-  $spec = darray[0 => varray['pipe', 'r'], 1 => varray['pipe', 'w'], 2 => varray['pipe', 'w']];
+  $spec = darray[
+    0 => varray['pipe', 'r'],
+    1 => varray['pipe', 'w'],
+    2 => varray['pipe', 'w'],
+  ];
   $pipes = varray[];
 
   $proc = \proc_open($command, $spec, inout $pipes);

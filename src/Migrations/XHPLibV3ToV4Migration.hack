@@ -194,13 +194,11 @@ final class XHPLibV3ToV4Migration extends BaseMigration {
     list($new_ns, $new_name) = self::split($new_name);
     $new_ns as nonnull;
 
-    $alias = C\find_key(
-      $ns['uses']['namespaces'],
-      $val ==> $val['name'] === $new_ns,
-    );
+    $alias =
+      C\find_key($ns['uses']['namespaces'], $val ==> $val['name'] === $new_ns);
     if ($alias is null) {
-      $alias = idx(self::DEFAULT_NS_ALIASES, $new_ns) ??
-        self::split($new_ns)[1];
+      $alias =
+        idx(self::DEFAULT_NS_ALIASES, $new_ns) ?? self::split($new_ns)[1];
       $this->newNamespaces[$new_ns] = $alias;
     }
 
@@ -269,9 +267,8 @@ final class XHPLibV3ToV4Migration extends BaseMigration {
       }
       // asyncify return type
       if ($new_header->hasType()) {
-        $new_header = $new_header->withType(
-          self::asyncifyType($new_header->getTypex()),
-        );
+        $new_header =
+          $new_header->withType(self::asyncifyType($new_header->getTypex()));
       }
       // add `async` keyword
       if (
@@ -410,6 +407,11 @@ final class XHPLibV3ToV4Migration extends BaseMigration {
       $grouped[$ns][$name] = $alias;
     }
 
+    /* HHAST_FIXME[DontCreateForwardingLambdas]
+       Removing the `$names ==> Dict\sort_by_key($names)` lambda causes a typechecker error.
+       `Dict\sort_by_key<>` has a context that depends on the second argument:
+       `?(function(Tk, Tk)[_]: num) $key_comparator = null,` + `[ctx $key_comparator]`
+       This means we can not use a function reference here.*/
     return Dict\map($grouped, $names ==> Dict\sort_by_key($names))
       |> Dict\sort_by_key($$)
       |> Vec\map_with_key(
