@@ -10,10 +10,8 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - name: test
-        run: |
-          brew tap hhvm/hhvm
-          brew update
-          brew install hhvm-4.128
-          command -v hhvm
-          lldb --batch -o run -o quit -- /usr/local/bin/hhvm --version
+      - run: brew tap hhvm/hhvm
+      - run: brew update
+      - run: brew install krb5 fribidi
+      - run: brew linkage hhvm-4.128
+      - run: lldb --batch -o run -o quit -- /usr/local/bin/hhvm --version
