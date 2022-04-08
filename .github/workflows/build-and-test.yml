@@ -15,4 +15,5 @@ jobs:
           brew tap hhvm/hhvm
           brew update
           brew install hhvm-4.128
-          lldb --batch -o run -o quit -- hhvm --version
+          command -v hhvm
+          lldb --batch -o run -o quit -- /usr/local/bin/hhvm --version
