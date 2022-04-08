@@ -7,10 +7,7 @@ on:
 jobs:
   build:
     name: HHVM macos
-    strategy:
-      # Run tests on all OS's and HHVM versions, even if one fails
-      fail-fast: false
-    runs-on: macos
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: test
