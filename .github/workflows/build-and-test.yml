@@ -6,11 +6,11 @@ on:
     - cron: '42 15 * * *'
 jobs:
   build:
-    name: HHVM ${{matrix.hhvm}} - ${{matrix.os}}
+    name: HHVM macos
     strategy:
       # Run tests on all OS's and HHVM versions, even if one fails
       fail-fast: false
-    runs-on: ${{matrix.os}}-latest
+    runs-on: macos
     steps:
       - uses: actions/checkout@v2
       - name: test
