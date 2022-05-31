@@ -44,9 +44,9 @@ jobs:
           path: ./.var/tmp/hhvm
       - run: bin/update-schema --hhvm-path=./.var/tmp/hhvm
       - if: github.event_name	== 'pull_request'
-        uses: getsentry/action-git-diff-suggestions@main
+        uses: reviewdog/action-suggester@v1
         with:
-          message: Update schema
+          tool_name: Update schema
       - if: github.event_name	!= 'pull_request'
         uses: peter-evans/create-pull-request@v4
         with:
