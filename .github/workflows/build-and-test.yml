@@ -59,9 +59,10 @@ jobs:
       - if: github.event_name	!= 'pull_request'
         run: bin/update-codegen --dont-update-ast --update-latest-breaking-version
       - if: github.event_name	!= 'pull_request'
+        run: git checkout -B "${{github.ref_name}}"
+      - if: github.event_name	!= 'pull_request'
         uses: peter-evans/create-pull-request@v4
         with:
-          base: ${{github.ref_name}}
           branch: update-latest-breaking-version/${{github.ref_name}}
           title: Update schema to a backward incompatible version
           body: |
