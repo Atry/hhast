@@ -1,0 +1,23 @@
+name: Update Schema
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "42 15 * * *"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          repository: facebook/hhvm
+          path: /tmp/hhvm-${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}
+      - uses: hhvm/actions/install-hack@master
+        with:
+          hhvm: nightly
+      - run: bin/update-schema "--hhvm-path=/tmp/hhvm-${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}"
+      - uses: peter-evans/create-pull-request@v4
+        with:
+          branch: update-schema/${{github.ref}}
