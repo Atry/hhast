@@ -37,18 +37,33 @@ jobs:
           hhvm: nightly
           skip_lint: true
           skip_tests: true
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-          repository: facebook/hhvm
-          path: ./.var/tmp/hhvm
-      - run: bin/update-schema --hhvm-path=./.var/tmp/hhvm
+      - if: github.event_name	== 'pull_request'
+        run: bin/update-codegen
       - if: github.event_name	== 'pull_request'
         uses: reviewdog/action-suggester@v1
         with:
           tool_name: Update schema
       - if: github.event_name	!= 'pull_request'
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+          repository: facebook/hhvm
+          path: ./.var/tmp/hhvm
+      - if: github.event_name	!= 'pull_request'
+        run: bin/update-schema --hhvm-path=./.var/tmp/hhvm
+      - if: github.event_name	!= 'pull_request'
         uses: peter-evans/create-pull-request@v4
         with:
           branch: update-schema/${{github.ref}}
           commit-message: Update schema
+      - if: github.event_name	!= 'pull_request'
+        run: bin/update-codegen --dont-update-ast --update-latest-breaking-version
+      - if: github.event_name	!= 'pull_request'
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: update-latest-breaking-version/${{github.ref}}
+          commit-message: |
+            Update schema to a backward incompatible version
+
+            This PR updates assumes the latest schema is a breaking change.
+            Feel free to close this PR if the schema is actually backward compatible with previous schema versions.
