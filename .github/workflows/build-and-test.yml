@@ -3,7 +3,7 @@ on:
   push:
   pull_request:
   schedule:
-    - cron: '42 15 * * *'
+    - cron: "42 15 * * *"
 jobs:
   build:
     name: HHVM ${{matrix.hhvm}} - ${{matrix.os}}
@@ -11,9 +11,9 @@ jobs:
       # Run tests on all OS's and HHVM versions, even if one fails
       fail-fast: false
       matrix:
-        os: [ ubuntu , macos ]
+        os: [ubuntu, macos]
         hhvm:
-          - '4.158'
+          - "4.158"
           - latest
           - nightly
     runs-on: ${{matrix.os}}-latest
@@ -28,3 +28,21 @@ jobs:
         run: bin/hhast-lint
       - name: Check for manually modified codegen
         run: vendor/bin/hh-codegen-verify-signatures codegen/
+  update-schema:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          repository: facebook/hhvm
+          path: ./.var/tmp/hhvm
+      - uses: hhvm/actions/hack-lint-test@master
+        with:
+          hhvm: nightly
+          skip_lint: true
+          skip_tests: true
+      - run: bin/update-schema --hhvm-path=./.var/tmp/hhvm
+      - uses: peter-evans/create-pull-request@v4
+        with:
+          branch: update-schema/${{github.ref}}
