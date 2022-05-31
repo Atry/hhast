@@ -58,9 +58,15 @@ jobs:
           title: Update schema
           commit-message: Update schema
       - if: github.event_name	!= 'pull_request'
+        run: git checkout -B "${{github.ref_name}}"
+      - if: github.event_name	!= 'pull_request'
         run: bin/update-codegen --dont-update-ast --update-latest-breaking-version
       - if: github.event_name	!= 'pull_request'
-        run: git checkout -B "${{github.ref_name}}"
+        uses: mikefarah/yq@master
+        with:
+          cmd: >
+            [[ "$(<codegen-no-rebuild/latest_breaking_version.hack)" =~ const\ string\ LATEST_BREAKING_HHVM_VERSION\ =\ \'([0-9]+\.[0-9]+)\. ]] &&
+            yq -i '.jobs.build.strategy.matrix.hhvm = ["'"${BASH_REMATCH[1]}"'", "latest", "nightly"]' .github/workflows/build-and-test.yml
       - if: github.event_name	!= 'pull_request'
         uses: peter-evans/create-pull-request@v4
         with:
