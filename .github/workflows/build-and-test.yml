@@ -43,6 +43,12 @@ jobs:
           repository: facebook/hhvm
           path: ./.var/tmp/hhvm
       - run: bin/update-schema --hhvm-path=./.var/tmp/hhvm
-      - uses: peter-evans/create-pull-request@v4
+      - if: github.event_name	== 'pull_request'
+        uses: getsentry/action-git-diff-suggestions@main
+        with:
+          message: Update schema
+      - if: github.event_name	!= 'pull_request'
+        uses: peter-evans/create-pull-request@v4
         with:
           branch: update-schema/${{github.ref}}
+          commit-message: Update schema
