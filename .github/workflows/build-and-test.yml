@@ -32,16 +32,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-          repository: facebook/hhvm
-          path: ./.var/tmp/hhvm
       - uses: hhvm/actions/hack-lint-test@master
         with:
           hhvm: nightly
           skip_lint: true
           skip_tests: true
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          repository: facebook/hhvm
+          path: ./.var/tmp/hhvm
       - run: bin/update-schema --hhvm-path=./.var/tmp/hhvm
       - uses: peter-evans/create-pull-request@v4
         with:
