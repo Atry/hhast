@@ -44,7 +44,7 @@ final class CodegenCLI extends CLIBase {
         () ==> {
           $this->updateLatestBreakingVersion = true;
         },
-        'Update `codegen/latest_breaking_change_version.hack` to mark the latest version as a breaking change.',
+        'Update `latest_breaking_change_version.hack` to mark the latest version as a breaking change.',
         '--update-latest-breaking-version',
       ),
       CLIOptions\flag(

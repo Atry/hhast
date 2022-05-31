@@ -12,6 +12,12 @@ namespace Facebook\HHAST\__Private;
 use type Facebook\HackCodegen\{CodegenFileType, HackBuilderValues};
 
 final class CodegenLastestBreakingVersion extends CodegenBase {
+
+  <<__Override>>
+  protected function getOutputDirectory(): string {
+    return __DIR__.'/../../../codegen-no-rebuild';
+  }
+
   <<__Override>>
   public function generate(): void {
     $cg = $this->getCodegenFactory();
