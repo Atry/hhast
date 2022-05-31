@@ -54,15 +54,15 @@ jobs:
       - if: github.event_name	!= 'pull_request'
         uses: peter-evans/create-pull-request@v4
         with:
-          branch: update-schema/${{github.ref}}
+          branch: update-schema/${{github.ref_name}}
           title: Update schema
       - if: github.event_name	!= 'pull_request'
         run: bin/update-codegen --dont-update-ast --update-latest-breaking-version
       - if: github.event_name	!= 'pull_request'
         uses: peter-evans/create-pull-request@v4
         with:
-          base: ${{github.ref}}
-          branch: update-latest-breaking-version/${{github.ref}}
+          base: ${{github.ref_name}}
+          branch: update-latest-breaking-version/${{github.ref_name}}
           title: Update schema to a backward incompatible version
           body: |
             This PR updates assumes the latest schema is a breaking change.
