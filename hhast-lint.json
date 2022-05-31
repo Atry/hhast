@@ -6,7 +6,7 @@
   ],
   "overrides": [
     {
-      "patterns": [ "codegen/*", "tests/examples/*" ],
+      "patterns": [ "codegen/*", "codegen-no-rebuild/*", "tests/examples/*" ],
       "disabledLinters": [
         "Facebook\\HHAST\\UnusedUseClauseLinter",
         "Facebook\\HHAST\\LicenseHeaderLinter"
