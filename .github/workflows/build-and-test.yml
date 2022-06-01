@@ -5,7 +5,7 @@ on:
   schedule:
     - cron: "42 15 * * *"
 jobs:
-  determine-latest-breaking-hhvm-version:
+  determine_latest_breaking_hhvm_version:
     runs-on: ubuntu-latest
     outputs:
       LATEST_BREAKING_HHVM_VERSION: ${{steps.set-matrix.outputs.LATEST_BREAKING_HHVM_VERSION}}
@@ -18,7 +18,7 @@ jobs:
           ]] && \
           echo "::set-output name=LATEST_BREAKING_HHVM_VERSION::${BASH_REMATCH[1]}"
   build:
-    needs: determine-latest-breaking-hhvm-version
+    needs: determine_latest_breaking_hhvm_version
     name: HHVM ${{matrix.hhvm}} - ${{matrix.os}}
     strategy:
       # Run tests on all OS's and HHVM versions, even if one fails
@@ -26,7 +26,7 @@ jobs:
       matrix:
         os: [ubuntu, macos]
         hhvm:
-          - ${{needs.determine-latest-breaking-hhvm-version.outputs.LATEST_BREAKING_HHVM_VERSION}}
+          - ${{needs.determine_latest_breaking_hhvm_version.outputs.LATEST_BREAKING_HHVM_VERSION}}
           - latest
           - nightly
     runs-on: ${{matrix.os}}-latest
