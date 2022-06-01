@@ -74,7 +74,7 @@ jobs:
         with:
           cmd:
             yq \
-              -i '.jobs.build.strategy.matrix.hhvm = ["'"$LATEST_BREAKING_HHVM_VERSION"'", "latest", "nightly"]' \
+              '.jobs.build.strategy.matrix.hhvm = ["'"$LATEST_BREAKING_HHVM_VERSION"'", "latest", "nightly"]' \
               .github/workflows/build-and-test.yml
       - if: github.event_name	!= 'pull_request'
         uses: peter-evans/create-pull-request@v4
