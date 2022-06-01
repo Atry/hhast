@@ -71,7 +71,7 @@ jobs:
           echo "LATEST_BREAKING_HHVM_VERSION=${BASH_REMATCH[1]}" >> $GITHUB_ENV
       - if: github.event_name	!= 'pull_request'
         name: Update build-and-test.yml
-        uses: mikefarah/yq@v4
+        uses: mikefarah/yq@master
         with:
           cmd: yq eval --inplace '.jobs.build.strategy.matrix.hhvm = ["'"$LATEST_BREAKING_HHVM_VERSION"'", "latest", "nightly"]' .github/workflows/build-and-test.yml
       - if: github.event_name	!= 'pull_request'
