@@ -5,7 +5,20 @@ on:
   schedule:
     - cron: "42 15 * * *"
 jobs:
+  determine-latest-breaking-hhvm-version:
+    runs-on: ubuntu-latest
+    outputs:
+      latest-breaking-hhvm-version: ${{ steps.set-matrix.outputs.latest-breaking-hhvm-version }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          [[ \
+            "$(<codegen-no-rebuild/latest_breaking_version.hack)" \
+            =~ const\ string\ LATEST_BREAKING_HHVM_VERSION\ =\ \'([0-9]+\.[0-9]+)\. \
+          ]] && \
+          echo "::set-output name=latest-breaking-hhvm-version::${BASH_REMATCH[1]}"
   build:
+    needs: determine-latest-breaking-hhvm-version
     name: HHVM ${{matrix.hhvm}} - ${{matrix.os}}
     strategy:
       # Run tests on all OS's and HHVM versions, even if one fails
@@ -13,7 +26,7 @@ jobs:
       matrix:
         os: [ubuntu, macos]
         hhvm:
-          - "4.158"
+          - ${{needs.determine-latest-breaking-hhvm-version.outputs.latest-breaking-hhvm-version}}
           - latest
           - nightly
     runs-on: ${{matrix.os}}-latest
@@ -61,19 +74,6 @@ jobs:
         run: git checkout -B "${{github.ref_name}}"
       - if: github.event_name	!= 'pull_request'
         run: bin/update-codegen --dont-update-ast --update-latest-breaking-version
-      - if: github.event_name	!= 'pull_request'
-        name: Extract LATEST_BREAKING_HHVM_VERSION from latest_breaking_version.hack
-        run: |
-          [[ \
-            "$(<codegen-no-rebuild/latest_breaking_version.hack)" \
-            =~ const\ string\ LATEST_BREAKING_HHVM_VERSION\ =\ \'([0-9]+\.[0-9]+)\. \
-          ]] && \
-          echo "LATEST_BREAKING_HHVM_VERSION=${BASH_REMATCH[1]}" >> $GITHUB_ENV
-      - if: github.event_name	!= 'pull_request'
-        name: Update build-and-test.yml
-        uses: mikefarah/yq@master
-        with:
-          cmd: yq eval --inplace '.jobs.build.strategy.matrix.hhvm = ["'"$LATEST_BREAKING_HHVM_VERSION"'", "latest", "nightly"]' .github/workflows/build-and-test.yml
       - if: github.event_name	!= 'pull_request'
         uses: peter-evans/create-pull-request@v4
         with:
