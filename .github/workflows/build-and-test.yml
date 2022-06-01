@@ -8,7 +8,7 @@ jobs:
   determine-latest-breaking-hhvm-version:
     runs-on: ubuntu-latest
     outputs:
-      latest-breaking-hhvm-version: ${{ steps.set-matrix.outputs.latest-breaking-hhvm-version }}
+      LATEST_BREAKING_HHVM_VERSION: ${{steps.set-matrix.outputs.LATEST_BREAKING_HHVM_VERSION}}
     steps:
       - uses: actions/checkout@v3
       - run: |
@@ -16,7 +16,7 @@ jobs:
             "$(<codegen-no-rebuild/latest_breaking_version.hack)" \
             =~ const\ string\ LATEST_BREAKING_HHVM_VERSION\ =\ \'([0-9]+\.[0-9]+)\. \
           ]] && \
-          echo "::set-output name=latest-breaking-hhvm-version::${BASH_REMATCH[1]}"
+          echo "::set-output name=LATEST_BREAKING_HHVM_VERSION::${BASH_REMATCH[1]}"
   build:
     needs: determine-latest-breaking-hhvm-version
     name: HHVM ${{matrix.hhvm}} - ${{matrix.os}}
@@ -26,7 +26,7 @@ jobs:
       matrix:
         os: [ubuntu, macos]
         hhvm:
-          - ${{needs.determine-latest-breaking-hhvm-version.outputs.latest-breaking-hhvm-version}}
+          - ${{needs.determine-latest-breaking-hhvm-version.outputs.LATEST_BREAKING_HHVM_VERSION}}
           - latest
           - nightly
     runs-on: ${{matrix.os}}-latest
