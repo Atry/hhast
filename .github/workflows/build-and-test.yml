@@ -62,11 +62,16 @@ jobs:
       - if: github.event_name	!= 'pull_request'
         run: bin/update-codegen --dont-update-ast --update-latest-breaking-version
       - if: github.event_name	!= 'pull_request'
-        uses: mikefarah/yq@master
+        uses: mikefarah/yq@v4
         with:
-          cmd: >
-            [[ "$(<codegen-no-rebuild/latest_breaking_version.hack)" =~ const\ string\ LATEST_BREAKING_HHVM_VERSION\ =\ \'([0-9]+\.[0-9]+)\. ]] &&
-            yq -i '.jobs.build.strategy.matrix.hhvm = ["'"${BASH_REMATCH[1]}"'", "latest", "nightly"]' .github/workflows/build-and-test.yml
+          cmd: |
+            [[ \
+              "$(<codegen-no-rebuild/latest_breaking_version.hack)" \
+              =~ const\ string\ LATEST_BREAKING_HHVM_VERSION\ =\ \'([0-9]+\.[0-9]+)\. \
+            ]] && \
+            yq \
+              -i '.jobs.build.strategy.matrix.hhvm = ["'"${BASH_REMATCH[1]}"'", "latest", "nightly"]' \
+              .github/workflows/build-and-test.yml
       - if: github.event_name	!= 'pull_request'
         uses: peter-evans/create-pull-request@v4
         with:
