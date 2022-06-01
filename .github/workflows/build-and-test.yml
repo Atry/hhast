@@ -31,6 +31,8 @@ jobs:
           - nightly
     runs-on: ${{matrix.os}}-latest
     steps:
+      - name: Dump needs context
+        run: echo '${{ toJSON(needs) }}'
       - uses: actions/checkout@v2
       - uses: hhvm/actions/hack-lint-test@master
         with:
