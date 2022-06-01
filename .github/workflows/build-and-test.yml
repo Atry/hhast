@@ -73,7 +73,7 @@ jobs:
         name: Update build-and-test.yml
         uses: mikefarah/yq@v4
         with:
-          cmd:
+          cmd: |
             yq \
               '.jobs.build.strategy.matrix.hhvm = ["'"$LATEST_BREAKING_HHVM_VERSION"'", "latest", "nightly"]' \
               .github/workflows/build-and-test.yml
