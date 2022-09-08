@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<796c39a389e95e4c7bbcd8577b5d4738>>
+ * @generated SignedSource<<c7a8a2efe3d4b0f86439bc3bcd9775fa>>
  */
 namespace Facebook\HHAST\__Private;
 
@@ -45,9 +45,11 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
     'dictionary_type_specifier',
     'generic_type_specifier',
     'keyset_type_specifier',
+    'like_type_specifier',
     'nullable_type_specifier',
     'shape_type_specifier',
     'simple_type_specifier',
+    'soft_type_specifier',
     'tuple_type_specifier',
     'varray_type_specifier',
     'vector_type_specifier',
@@ -115,6 +117,7 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
     'missing',
   ],
   'as_expression.as_left_operand' => keyset[
+    'as_expression',
     'function_call_expression',
     'literal',
     'member_selection_expression',
@@ -309,6 +312,7 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
     'function_call_expression',
     'literal',
     'object_creation_expression',
+    'parenthesized_expression',
     'prefix_unary_expression',
     'scope_resolution_expression',
     'token:name',
@@ -495,6 +499,7 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
   'closure_parameter_type_specifier.closure_parameter_type' => keyset[
     'attributized_specifier',
     'closure_type_specifier',
+    'darray_type_specifier',
     'generic_type_specifier',
     'nullable_type_specifier',
     'simple_type_specifier',
@@ -626,6 +631,7 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
     'list<do_statement|echo_statement|expression_statement|if_statement>',
     'list<do_statement|echo_statement|expression_statement|try_statement>',
     'list<do_statement|expression_statement>',
+    'list<do_statement|expression_statement|for_statement|if_statement|switch_statement|try_statement|using_statement_block_scoped|using_statement_function_scoped|while_statement>',
     'list<do_statement|expression_statement|if_statement>',
     'list<do_statement|expression_statement|return_statement>',
     'list<do_statement|expression_statement|unset_statement>',
@@ -911,6 +917,7 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
     'list<list_item<darray_intrinsic_expression>|list_item<literal>|list_item<variable>>',
     'list<list_item<darray_intrinsic_expression>|list_item<variable>>',
     'list<list_item<decorated_expression>>',
+    'list<list_item<decorated_expression>|list_item<function_call_expression>>',
     'list<list_item<decorated_expression>|list_item<variable>>',
     'list<list_item<dictionary_intrinsic_expression>>',
     'list<list_item<dictionary_intrinsic_expression>|list_item<literal>>',
@@ -1174,6 +1181,7 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
   ],
   'do_statement.do_condition' => keyset[
     'binary_expression',
+    'function_call_expression',
     'literal',
     'subscript_expression',
     'variable',
@@ -1480,12 +1488,15 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
     'object_creation_expression',
     'postfix_unary_expression',
     'prefix_unary_expression',
+    'prefixed_code',
     'safe_member_selection_expression',
     'scope_resolution_expression',
+    'shape_expression',
     'subscript_expression',
     'token:name',
     'variable',
     'varray_intrinsic_expression',
+    'vector_intrinsic_expression',
     'xhp_expression',
     'yield_expression',
   ],
@@ -2058,7 +2069,9 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
     'token:(',
   ],
   'function_call_expression.function_call_receiver' => keyset[
+    'anonymous_function',
     'function_call_expression',
+    'lambda_expression',
     'member_selection_expression',
     'parenthesized_expression',
     'qualified_name',
@@ -2258,6 +2271,7 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
   ],
   'is_expression.is_left_operand' => keyset[
     'anonymous_function',
+    'as_expression',
     'function_call_expression',
     'literal',
     'member_selection_expression',
@@ -2428,6 +2442,7 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
     'generic_type_specifier',
     'like_type_specifier',
     'simple_type_specifier',
+    'soft_type_specifier',
     'type_constant',
     'varray_type_specifier',
     'vector_type_specifier',
@@ -2586,6 +2601,12 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
     'missing',
     'old_attribute_specification',
   ],
+  'module_declaration.module_declaration_exports' => keyset[
+    'missing',
+  ],
+  'module_declaration.module_declaration_imports' => keyset[
+    'missing',
+  ],
   'module_declaration.module_declaration_left_brace' => keyset[
     'token:{',
   ],
@@ -2593,7 +2614,7 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
     'token:module',
   ],
   'module_declaration.module_declaration_name' => keyset[
-    'qualified_name',
+    'module_name',
   ],
   'module_declaration.module_declaration_new_keyword' => keyset[
     'token:new',
@@ -2606,12 +2627,15 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
       'token:module',
     ],
   'module_membership_declaration.module_membership_declaration_name' => keyset[
-    'qualified_name',
+    'module_name',
   ],
   'module_membership_declaration.module_membership_declaration_semicolon' =>
     keyset[
       'token:;',
     ],
+  'module_name.module_name_parts' => keyset[
+    'list<list_item<token:name>>',
+  ],
   'namespace_body.namespace_declarations' => keyset[
     'list<alias_declaration>',
     'list<alias_declaration|enum_declaration|function_declaration|namespace_declaration|namespace_use_declaration>',
@@ -2743,6 +2767,7 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
     'like_type_specifier',
     'shape_type_specifier',
     'simple_type_specifier',
+    'soft_type_specifier',
     'tuple_type_specifier',
     'type_constant',
     'varray_type_specifier',
@@ -3192,6 +3217,13 @@ const dict<string, keyset<string>> INFERRED_RELATIONSHIPS = dict[
     'token:vec',
     'token:void',
     'token:xhp',
+  ],
+  'soft_type_specifier.soft_at' => keyset[
+    'token:@',
+  ],
+  'soft_type_specifier.soft_type' => keyset[
+    'like_type_specifier',
+    'simple_type_specifier',
   ],
   'subscript_expression.subscript_index' => keyset[
     'binary_expression',
