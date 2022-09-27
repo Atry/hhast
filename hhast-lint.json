@@ -1,6 +1,6 @@
 {
   "roots": [ "src/", "codegen/", "tests/" ],
-  "builtinLinters": "all",
+  "builtinLinters": "none",
   "overrides": [
     {
       "patterns": [ "codegen/*", "tests/examples/*" ],
@@ -23,6 +23,7 @@
       ]
     }
   ],
+  "extraLinters": ["Facebook\\HHAST\\HHClientLinter"],
   "linterConfigs": {
     "Facebook\\HHAST\\HHClientLinter": {
       "ignore": [5611]
