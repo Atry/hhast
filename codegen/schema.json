@@ -1,6 +1,6 @@
 { "description" :
   "@generated JSON schema of the Hack Full Fidelity Parser AST",
-  "version" : "2022-07-20-0000",
+  "version" : "2022-09-29-0000",
   "trivia" : [
     { "trivia_kind_name" : "WhiteSpace",
       "trivia_type_name" : "whitespace" },
@@ -87,6 +87,8 @@
       "token_text" : "enum" },
     { "token_kind" : "Eval",
       "token_text" : "eval" },
+    { "token_kind" : "Exports",
+      "token_text" : "exports" },
     { "token_kind" : "Extends",
       "token_text" : "extends" },
     { "token_kind" : "Fallthrough",
@@ -111,6 +113,8 @@
       "token_text" : "if" },
     { "token_kind" : "Implements",
       "token_text" : "implements" },
+    { "token_kind" : "Imports",
+      "token_text" : "imports" },
     { "token_kind" : "Include",
       "token_text" : "include" },
     { "token_kind" : "Include_once",
@@ -371,6 +375,8 @@
       "token_text" : "readonly" },
     { "token_kind" : "Internal",
       "token_text" : "internal" },
+    { "token_kind" : "Package",
+      "token_text" : "package" },
 
     { "token_kind" : "ErrorToken",
       "token_text" : null },
@@ -444,6 +450,13 @@
       "type_name" : "qualified_name",
       "description" : "qualified_name",
       "prefix" : "qualified_name",
+      "fields" : [
+        { "field_name" : "parts" }
+      ] },
+    { "kind_name" : "ModuleName",
+      "type_name" : "module_name",
+      "description" : "module_name",
+      "prefix" : "module_name",
       "fields" : [
         { "field_name" : "parts" }
       ] },
@@ -2097,6 +2110,28 @@
         { "field_name" : "module_keyword" },
         { "field_name" : "name" },
         { "field_name" : "left_brace" },
+        { "field_name" : "exports" },
+        { "field_name" : "imports" },
+        { "field_name" : "right_brace" }
+      ] },
+    { "kind_name" : "ModuleExports",
+      "type_name" : "module_exports",
+      "description" : "module_exports",
+      "prefix" : "module_exports",
+      "fields" : [
+        { "field_name" : "exports_keyword" },
+        { "field_name" : "left_brace" },
+        { "field_name" : "exports" },
+        { "field_name" : "right_brace" }
+      ] },
+    { "kind_name" : "ModuleImports",
+      "type_name" : "module_imports",
+      "description" : "module_imports",
+      "prefix" : "module_imports",
+      "fields" : [
+        { "field_name" : "imports_keyword" },
+        { "field_name" : "left_brace" },
+        { "field_name" : "imports" },
         { "field_name" : "right_brace" }
       ] },
     { "kind_name" : "ModuleMembershipDeclaration",
@@ -2107,6 +2142,39 @@
         { "field_name" : "module_keyword" },
         { "field_name" : "name" },
         { "field_name" : "semicolon" }
+      ] },
+    { "kind_name" : "PackageDeclaration",
+      "type_name" : "package_declaration",
+      "description" : "package_declaration",
+      "prefix" : "package_declaration",
+      "fields" : [
+        { "field_name" : "attribute_spec" },
+        { "field_name" : "package_keyword" },
+        { "field_name" : "name" },
+        { "field_name" : "left_brace" },
+        { "field_name" : "uses" },
+        { "field_name" : "includes" },
+        { "field_name" : "right_brace" }
+      ] },
+    { "kind_name" : "PackageUses",
+      "type_name" : "package_uses",
+      "description" : "package_uses",
+      "prefix" : "package_uses",
+      "fields" : [
+        { "field_name" : "use_keyword" },
+        { "field_name" : "left_brace" },
+        { "field_name" : "uses" },
+        { "field_name" : "right_brace" }
+      ] },
+    { "kind_name" : "PackageIncludes",
+      "type_name" : "package_includes",
+      "description" : "package_includes",
+      "prefix" : "package_includes",
+      "fields" : [
+        { "field_name" : "include_keyword" },
+        { "field_name" : "left_brace" },
+        { "field_name" : "includes" },
+        { "field_name" : "right_brace" }
       ] },
 
     { "kind_name" : "Token",

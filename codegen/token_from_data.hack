@@ -1,7 +1,7 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<f0deaf24b9a5f5ea0781a9074ee27cd8>>
+ * @generated SignedSource<<7d078c309d4c59beeb06f60355a04722>>
  */
 namespace Facebook\HHAST\__Private;
 use namespace Facebook\HHAST;
@@ -64,6 +64,7 @@ final class TokenClassMap {
     'endif' => HHAST\EndifToken::class,
     'enum' => HHAST\EnumToken::class,
     'eval' => HHAST\EvalToken::class,
+    'exports' => HHAST\ExportsToken::class,
     'extends' => HHAST\ExtendsToken::class,
     'fallthrough' => HHAST\FallthroughToken::class,
     'file' => HHAST\FileToken::class,
@@ -76,6 +77,7 @@ final class TokenClassMap {
     'global' => HHAST\GlobalToken::class,
     'if' => HHAST\IfToken::class,
     'implements' => HHAST\ImplementsToken::class,
+    'imports' => HHAST\ImportsToken::class,
     'include' => HHAST\IncludeToken::class,
     'include_once' => HHAST\Include_onceToken::class,
     'inout' => HHAST\InoutToken::class,
@@ -99,6 +101,7 @@ final class TokenClassMap {
     'noreturn' => HHAST\NoreturnToken::class,
     'null' => HHAST\NullLiteralToken::class,
     'num' => HHAST\NumToken::class,
+    'package' => HHAST\PackageToken::class,
     'parent' => HHAST\ParentToken::class,
     'print' => HHAST\PrintToken::class,
     'private' => HHAST\PrivateToken::class,
